@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    fswatch-rb (0.1.0)
+    fswatch-rb (0.1.2)
 
 GEM
   remote: https://rubygems.org/
