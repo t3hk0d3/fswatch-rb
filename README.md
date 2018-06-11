@@ -1,6 +1,6 @@
 # fswatch-rb
 
-fswatch-rb is binding for multi-platform fswatch library.
+fswatch-rb is Ruby binding gem for multi-platform fswatch library.
 
 https://github.com/emcrisostomo/fswatch/
 
