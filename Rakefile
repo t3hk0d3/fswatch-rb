@@ -10,4 +10,4 @@ Rake::ExtensionTask.new do |ext|
   ext.lib_dir = 'lib/fswatch'                                                               
 end
 
-task :default => :spec
+task :default => [:compile, :spec]
