@@ -14,7 +14,8 @@ static VALUE fswatch_monitor_init(VALUE self, VALUE rb_settings) {
 
   VALUE rb_callback = rb_hash_lookup(rb_settings, ID2SYM(rb_intern("callback")));
 
-  if(rb_obj_is_proc(rb_callback) != Qtrue) {
+  if(rb_obj_is_proc(rb_callback) != Qtrue &&
+     rb_obj_is_method(rb_callback) != Qtrue) {
     rb_raise(rb_eArgError, "Callback is not specified!");
     return self;
   }
