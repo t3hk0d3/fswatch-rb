@@ -68,7 +68,7 @@ static void fswatch_add_properties(FSW_HANDLE handle, VALUE rb_settings) {
 }
 
 static void fswatch_add_event_type_filters(FSW_HANDLE handle, VALUE rb_settings) {
-  VALUE rb_event_types = rb_hash_lookup(rb_settings, ID2SYM(rb_intern("event_types")));
+  VALUE rb_event_types = rb_hash_lookup(rb_settings, ID2SYM(rb_intern("event_flags")));
 
   if (rb_event_types == Qnil) {
     return;

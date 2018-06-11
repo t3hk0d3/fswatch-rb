@@ -1,12 +1,16 @@
-# Fswatch::Rb
+# fswatch-rb
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/fswatch/rb`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+fswatch-rb is gem with native extension for fswatch library.
 
 ## Installation
 
-Add this line to your application's Gemfile:
+First you need to install fswatch >= 1.11.3
+
+```bash
+$ brew install fswatch
+```
+
+Then add this line to your application's Gemfile:
 
 ```ruby
 gem 'fswatch-rb'
@@ -22,17 +26,47 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+```ruby
+require 'fswatch'
 
-## Development
+events_array = []
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+watcher = Fswatch::Watcher.new(
+    path: '~/my/awesome/project/directory/',
+    event_flags: [:created, :updated, :is_file, :renamed, :removed],
+    filters: { # global filters, high-perfomance
+      /\.ex$/ix => :exclude, # if file ends with \.ex - it should be excluded
+      /\.in$/ix => :include  # if file ends with \.in - it should be included
+    },
+    latency: 0.1, # 100ms
+    recursive: true,
+    follow_symlinks: true,
+)
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+watcher.watch do |file, timestamp, flags|
+  puts "File #{file} has been changed at #{timestamp} with #{flags}"
+end
+
+# local filename filter, low-perfomance
+watcher.watch(match: /\.css$/) do |file, timestamp, flags|
+  puts "CSS File #{file} has been changed!"
+end
+
+watcher.start! # this will spawn new thread in background
+
+watcher.running? # => true
+
+# ... do evil stuff ...
+
+watcher.stop!
+
+watcher.running? # => false
+
+```
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/fswatch-rb.
+Bug reports and pull requests are welcome on GitHub at https://github.com/t3hk0d3/fswatch-rb.
 
 ## License
 

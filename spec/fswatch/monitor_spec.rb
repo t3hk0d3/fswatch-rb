@@ -9,7 +9,7 @@ RSpec.describe Fswatch::Monitor do
     properties: {
       foo: "bar"
     },
-    event_types: [:created, :updated, :is_file, :renamed, :removed],
+    event_flags: [:created, :updated, :is_file, :renamed, :removed],
     filters: {
       /\.ex$/ix => :exclude, # if file ends with \.ex - it should be excluded
       /\.in$/ix => :include  # if file ends with \.in - it should be included
