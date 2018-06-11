@@ -37,8 +37,9 @@ watcher = Fswatch::Watcher.new(
   path: '~/my/awesome/project/directory/',
   event_flags: [:created, :updated, :is_file, :renamed, :removed],
   filters: { # global filters, high-perfomance
-    /\.ex$/ix => :exclude, # if file ends with \.ex - it should be excluded
-    /\.in$/ix => :include  # if file ends with \.in - it should be included
+    /\.tmp$/ix => :exclude, # if file ends with .tmp it will be ignored
+    /\(.rb|.slim)$/x => :include  # include only .rb and .slim files
+    # Please note these reg exps are executed OUTSIDE ruby and not by ruby regexp implementation, so be careful
   },
   latency: 0.1, # 100ms
   recursive: true,
