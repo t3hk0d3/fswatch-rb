@@ -1,6 +1,8 @@
 # fswatch-rb
 
-fswatch-rb is gem with native extension for fswatch library.
+fswatch-rb is binding for multi-platform fswatch library.
+
+https://github.com/emcrisostomo/fswatch/
 
 ## Installation
 
