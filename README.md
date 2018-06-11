@@ -31,8 +31,6 @@ Or install it yourself as:
 ```ruby
 require 'fswatch'
 
-events_array = []
-
 watcher = Fswatch::Watcher.new(
   path: '~/my/awesome/project/directory/',
   event_flags: [:created, :updated, :is_file, :renamed, :removed],
