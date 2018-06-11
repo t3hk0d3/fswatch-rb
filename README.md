@@ -34,15 +34,15 @@ require 'fswatch'
 events_array = []
 
 watcher = Fswatch::Watcher.new(
-    path: '~/my/awesome/project/directory/',
-    event_flags: [:created, :updated, :is_file, :renamed, :removed],
-    filters: { # global filters, high-perfomance
-      /\.ex$/ix => :exclude, # if file ends with \.ex - it should be excluded
-      /\.in$/ix => :include  # if file ends with \.in - it should be included
-    },
-    latency: 0.1, # 100ms
-    recursive: true,
-    follow_symlinks: true,
+  path: '~/my/awesome/project/directory/',
+  event_flags: [:created, :updated, :is_file, :renamed, :removed],
+  filters: { # global filters, high-perfomance
+    /\.ex$/ix => :exclude, # if file ends with \.ex - it should be excluded
+    /\.in$/ix => :include  # if file ends with \.in - it should be included
+  },
+  latency: 0.1, # 100ms
+  recursive: true,
+  follow_symlinks: true,
 )
 
 watcher.watch do |file, timestamp, flags|
