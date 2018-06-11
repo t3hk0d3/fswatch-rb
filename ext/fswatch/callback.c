@@ -32,7 +32,12 @@ void* fswatch_callback_handler_with_gvl(void* data) {
 
   VALUE rb_proc_obj = rb_ivar_get(context->object, rb_intern("callback"));
 
-  rb_proc_call(rb_proc_obj, rb_ary_new_from_args(1, rb_aEvents));
+  if (rb_obj_is_proc(rb_proc_obj) == Qtrue) {
+    rb_proc_call(rb_proc_obj, rb_ary_new_from_args(1, rb_aEvents));
+  } else {
+    rb_method_call(1, &rb_aEvents, rb_proc_obj);
+  }
+
 
   return NULL;
 }
