@@ -15,7 +15,7 @@ void* fswatch_callback_handler_with_gvl(void* data) {
 
   VALUE rb_aEvents = rb_ary_new2(context->event_num);
 
-  for (int i = 0 ; i < context->event_num ; i++) {
+  for (unsigned int i = 0 ; i < context->event_num ; i++) {
     const fsw_cevent event = context->events[i];
 
     VALUE rb_aEvent = rb_ary_new2(2 + event.flags_num);
@@ -23,7 +23,7 @@ void* fswatch_callback_handler_with_gvl(void* data) {
     rb_ary_push(rb_aEvent, rb_str_new2(event.path));
     rb_ary_push(rb_aEvent, INT2NUM(event.evt_time));
 
-    for (int c = 0 ; c < event.flags_num ; c++) {
+    for (unsigned int c = 0 ; c < event.flags_num ; c++) {
       rb_ary_push(rb_aEvent, fswatch_event_name(event.flags[c]));
     }
 

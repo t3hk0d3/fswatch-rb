@@ -1,6 +1,10 @@
 require 'mkmf'
 
-$CXXFLAGS += " -std=c++11 "
+
+$CFLAGS += ' -Wall -Wextra '
+$CXXFLAGS += ' -std=c++11 '
+
+RbConfig::MAKEFILE_CONFIG['CC'] = ENV['CC'] if ENV['CC']
 
 HEADER_DIRS = [
   '/opt/local/include',
@@ -24,10 +28,6 @@ end
 
 unless find_library('fswatch', 'fsw_init_library')
   abort "libfswatch is missing.  please install libfswatch"
-end
-
-unless have_func('fsw_is_running')
-  abort 'libfswatch version >= 1.11.3 is required. Please upgrade!'
 end
 
 create_makefile('fswatch/fswatch')
