@@ -26,7 +26,7 @@ module Fswatch
     end
 
     def stop!
-      raise 'Not running!' if running?
+      raise 'Not running!' unless running?
 
       @monitor.stop
     end
